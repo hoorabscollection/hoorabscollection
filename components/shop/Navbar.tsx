@@ -13,7 +13,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex flex-col">
           <span className="font-playfair text-2xl font-black text-crimson leading-none">Hoorab's Collection</span>
-          <span className="font-cinzel text-[9px] tracking-widest text-gray-500 uppercase">Pakistani Couture · London</span>
+          <span className="font-cinzel text-[9px] tracking-widest text-gray-700 uppercase font-bold">Pakistani Couture · London</span>
         </Link>
 
         {/* Desktop nav */}
