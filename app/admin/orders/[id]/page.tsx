@@ -1,0 +1,184 @@
+import { createServerSupabase } from '@/lib/supabase-server'
+import { redirect } from 'next/navigation'
+import Link from 'next/link'
+import OrderStatusUpdater from '@/components/admin/OrderStatusUpdater'
+
+export default async function AdminOrderDetailPage({ params }: { params: { id: string } }) {
+  const supabase = createServerSupabase()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user || user.email !== process.env.ADMIN_EMAIL) redirect('/admin/login')
+
+  const { data: order } = await supabase
+    .from('orders')
+    .select('*, order_items(*)')
+    .eq('id', params.id)
+    .single()
+
+  if (!order) redirect('/admin/orders')
+
+  const statuses = ['pending', 'confirmed', 'processing', 'shipped', 'delivered', 'cancelled', 'refunded']
+
+  const statusColor: Record<string, string> = {
+    pending: 'bg-yellow-100 text-yellow-800',
+    confirmed: 'bg-blue-100 text-blue-800',
+    processing: 'bg-purple-100 text-purple-800',
+    shipped: 'bg-indigo-100 text-indigo-800',
+    delivered: 'bg-green-100 text-green-800',
+    cancelled: 'bg-red-100 text-red-800',
+    refunded: 'bg-gray-100 text-gray-800',
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <nav className="bg-[#1A0A0A] text-white px-6 py-4 flex items-center gap-6">
+        <Link href="/admin/orders" className="font-playfair text-xl font-black text-crimson">← Orders</Link>
+        <span className="font-cinzel text-xs tracking-widest text-gold uppercase">Order Detail</span>
+      </nav>
+
+      <div className="max-w-4xl mx-auto px-6 py-8">
+        {/* Header */}
+        <div className="flex items-start justify-between mb-8">
+          <div>
+            <h1 className="font-playfair text-3xl font-black mb-1">{order.order_number}</h1>
+            <p className="text-gray-500 text-sm">{new Date(order.created_at).toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+          </div>
+          <div className="text-right">
+            <span className={`font-cinzel text-xs tracking-widest px-3 py-1.5 rounded uppercase ${statusColor[order.status] || 'bg-gray-100'}`}>
+              {order.status}
+            </span>
+            <p className="font-playfair text-2xl font-black text-crimson mt-2">£{order.total.toFixed(2)}</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          {/* Customer Details */}
+          <div className="bg-white border border-gray-100 rounded p-6">
+            <h2 className="font-playfair text-lg font-bold mb-4">Customer Details</h2>
+            <div className="space-y-2 text-sm">
+              <div className="flex gap-2">
+                <span className="text-gray-400 w-24 shrink-0">Name:</span>
+                <span className="font-medium">{order.customer_name}</span>
+              </div>
+              <div className="flex gap-2">
+                <span className="text-gray-400 w-24 shrink-0">Email:</span>
+                <a href={`mailto:${order.customer_email}`} className="text-crimson hover:underline">{order.customer_email}</a>
+              </div>
+              <div className="flex gap-2">
+                <span className="text-gray-400 w-24 shrink-0">Phone:</span>
+                <span>{order.customer_phone || '—'}</span>
+              </div>
+              <div className="flex gap-2 mt-2">
+                <a href={`https://wa.me/${order.customer_phone?.replace(/\D/g, '')}`} target="_blank"
+                  className="bg-[#25D366] text-white font-cinzel text-xs tracking-widest px-3 py-1.5 uppercase hover:bg-green-600 transition-colors">
+                  💬 WhatsApp Customer
+                </a>
+                <a href={`mailto:${order.customer_email}`}
+                  className="border border-gray-200 text-gray-600 font-cinzel text-xs tracking-widest px-3 py-1.5 uppercase hover:border-crimson hover:text-crimson transition-colors">
+                  ✉ Email Customer
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Shipping Address */}
+          <div className="bg-white border border-gray-100 rounded p-6">
+            <h2 className="font-playfair text-lg font-bold mb-4">Shipping Address</h2>
+            <div className="text-sm space-y-1">
+              <p className="font-medium">{order.customer_name}</p>
+              <p>{order.shipping_address_line1}</p>
+              {order.shipping_address_line2 && <p>{order.shipping_address_line2}</p>}
+              <p>{order.shipping_city}</p>
+              <p>{order.shipping_postcode}</p>
+              <p>{order.shipping_country}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Order Items */}
+        <div className="bg-white border border-gray-100 rounded p-6 mb-6">
+          <h2 className="font-playfair text-lg font-bold mb-4">Order Items</h2>
+          <table className="w-full text-sm">
+            <thead className="bg-gray-50">
+              <tr>
+                {['Product', 'Colour', 'Size', 'Qty', 'Price', 'Total'].map(h => (
+                  <th key={h} className="text-left px-3 py-2 font-cinzel text-[10px] tracking-widest text-gray-400 uppercase">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {(order.order_items || []).map((item: any) => (
+                <tr key={item.id} className="border-t border-gray-50">
+                  <td className="px-3 py-3">
+                    <div className="flex items-center gap-3">
+                      {item.product_image && (
+                        <img src={item.product_image} alt={item.product_name} className="w-10 h-12 object-cover rounded"/>
+                      )}
+                      <span className="font-medium">{item.product_name}</span>
+                    </div>
+                  </td>
+                  <td className="px-3 py-3 text-gray-500">{item.selected_colour || '—'}</td>
+                  <td className="px-3 py-3 text-gray-500">{item.selected_size || '—'}</td>
+                  <td className="px-3 py-3">{item.quantity}</td>
+                  <td className="px-3 py-3">£{item.price.toFixed(2)}</td>
+                  <td className="px-3 py-3 font-bold text-crimson">£{(item.price * item.quantity).toFixed(2)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="border-t border-gray-100 mt-4 pt-4 text-right space-y-1">
+            <div className="flex justify-end gap-8 text-sm text-gray-500">
+              <span>Subtotal</span><span>£{order.subtotal.toFixed(2)}</span>
+            </div>
+            {order.discount_amount > 0 && (
+              <div className="flex justify-end gap-8 text-sm text-seagreen">
+                <span>Discount</span><span>-£{order.discount_amount.toFixed(2)}</span>
+              </div>
+            )}
+            <div className="flex justify-end gap-8 text-sm text-gray-500">
+              <span>Shipping</span><span>Free</span>
+            </div>
+            <div className="flex justify-end gap-8 font-bold text-base">
+              <span>Total</span><span className="text-crimson">£{order.total.toFixed(2)}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Update Status */}
+        <div className="bg-white border border-gray-100 rounded p-6 mb-6">
+          <h2 className="font-playfair text-lg font-bold mb-4">Update Order Status</h2>
+          <div className="flex items-center gap-4">
+            <OrderStatusUpdater orderId={order.id} currentStatus={order.status} statuses={statuses}/>
+            <p className="text-sm text-gray-500 font-cormorant">Customer will receive an email when status changes</p>
+          </div>
+        </div>
+
+        {/* Tracking */}
+        <div className="bg-white border border-gray-100 rounded p-6">
+          <h2 className="font-playfair text-lg font-bold mb-4">Tracking Number</h2>
+          <div className="flex gap-3">
+            <input
+              id="tracking"
+              defaultValue={order.tracking_number || ''}
+              placeholder="Enter tracking number"
+              className="input flex-1"
+            />
+            <button
+              onClick={async () => {
+                const tracking = (document.getElementById('tracking') as HTMLInputElement).value
+                await fetch(`/api/orders/tracking`, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ orderId: order.id, tracking_number: tracking })
+                })
+                alert('Tracking number saved!')
+              }}
+              className="btn-crimson whitespace-nowrap"
+            >
+              Save Tracking
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
