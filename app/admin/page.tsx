@@ -20,7 +20,7 @@ export default async function AdminDashboard() {
     supabase.from('products').select('*', { count: 'exact', head: true }).eq('is_active', true),
     supabase.from('profiles').select('*', { count: 'exact', head: true }),
     supabase.from('enquiries').select('*', { count: 'exact', head: true }).eq('status', 'new'),
-    supabase.from('orders').select('*').order('created_at', { ascending: false }).limit(8),
+    supabase.from('orders').select('id, order_number, customer_name, customer_email, customer_phone, total, status, created_at, shipping_city, shipping_postcode').order('created_at', { ascending: false }).limit(8),
   ])
 
   const statusColor: Record<string, string> = {
