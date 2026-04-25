@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     const session = event.data.object as Stripe.Checkout.Session
     const supabase = createAdminSupabase()
 
-    const shipping = session.shipping_details
+    const shipping = session.shipping_details || (session as any).collected_information?.shipping_details
     const items = JSON.parse(session.metadata?.items || '[]')
 
     // Generate order number
@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
       total: session.amount_total! / 100,
       promo_code: session.metadata?.promo_code || null,
       customer_name: shipping?.name || session.customer_details?.name || '',
-      customer_email: session.customer_email || '',
+      customer_email: session.customer_email || session.customer_details?.email || '',
       customer_phone: session.customer_details?.phone || '',
       shipping_address_line1: shipping?.address?.line1 || '',
       shipping_address_line2: shipping?.address?.line2 || '',
