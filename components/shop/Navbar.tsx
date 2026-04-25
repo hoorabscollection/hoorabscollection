@@ -13,13 +13,13 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex flex-col">
           <span className="font-playfair text-2xl font-black text-crimson leading-none">Hoorab's Collection</span>
-          <span className="font-cinzel text-[9px] tracking-widest text-gold uppercase">Pakistani Couture · London</span>
+          <span className="font-cinzel text-[9px] tracking-widest text-gray-500 uppercase">Pakistani Couture · London</span>
         </Link>
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
           {[['Shop', '/shop'], ['Bridal', '/shop?category=bridal'], ['Casual', '/shop?category=casual'], ['Accessories', '/shop?category=accessories'], ['Contact', '/contact']].map(([l, h]) => (
-            <Link key={l} href={h} className="font-cinzel text-[11px] tracking-widest text-gray-700 hover:text-crimson uppercase transition-colors">{l}</Link>
+            <Link key={l} href={h} className="font-cinzel text-[11px] tracking-widest text-gray-900 hover:text-crimson uppercase transition-colors font-semibold">{l}</Link>
           ))}
         </nav>
 
