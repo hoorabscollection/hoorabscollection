@@ -35,7 +35,10 @@ export default function Footer() {
         </div>
         <div className="pt-6 flex flex-wrap items-center justify-between gap-4">
           <p className="text-white/25 text-xs">© 2026 Hoorab's Collection · London, United Kingdom</p>
-          <p className="font-cinzel text-[9px] tracking-widest text-gold/30 uppercase">Made with ♥ for Pakistani Fashion</p>
+          <div className="flex gap-4">
+            <a href="/terms" className="text-white/25 text-xs hover:text-white/50 transition-colors">Terms & Conditions</a>
+            <a href="/privacy" className="text-white/25 text-xs hover:text-white/50 transition-colors">Privacy Policy</a>
+          </div>
         </div>
       </div>
     </footer>
