@@ -1,22 +1,20 @@
-import { createServerSupabase } from '@/lib/supabase-server'
-import { redirect } from 'next/navigation'
+'use client'
+import { useEffect, useState } from 'react'
+import { createClient } from '@/lib/supabase'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import OrderStatusUpdater from '@/components/admin/OrderStatusUpdater'
+import toast from 'react-hot-toast'
 
-export default async function AdminOrderDetailPage({ params }: { params: { id: string } }) {
-  const supabase = createServerSupabase()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user || user.email !== process.env.ADMIN_EMAIL) redirect('/admin/login')
-
-  const { data: order, error } = await supabase
-    .from('orders')
-    .select('*, order_items(*)')
-    .eq('id', params.id)
-    .single()
-
-  if (error || !order) redirect('/admin/orders')
+export default function AdminOrderDetailPage({ params }: { params: { id: string } }) {
+  const [order, setOrder] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+  const [tracking, setTracking] = useState('')
+  const [status, setStatus] = useState('')
+  const router = useRouter()
+  const supabase = createClient()
 
   const statuses = ['pending', 'confirmed', 'processing', 'shipped', 'delivered', 'cancelled', 'refunded']
+
   const statusColor: Record<string, string> = {
     pending: 'bg-yellow-100 text-yellow-800',
     confirmed: 'bg-blue-100 text-blue-800',
@@ -27,25 +25,73 @@ export default async function AdminOrderDetailPage({ params }: { params: { id: s
     refunded: 'bg-gray-100 text-gray-800',
   }
 
+  useEffect(() => {
+    const fetchOrder = async () => {
+      const { data } = await supabase
+        .from('orders')
+        .select('*, order_items(*)')
+        .eq('id', params.id)
+        .single()
+      if (data) {
+        setOrder(data)
+        setTracking(data.tracking_number || '')
+        setStatus(data.status)
+      }
+      setLoading(false)
+    }
+    fetchOrder()
+  }, [params.id])
+
+  const updateStatus = async (newStatus: string) => {
+    setStatus(newStatus)
+    await supabase.from('orders').update({ status: newStatus }).eq('id', params.id)
+    await fetch('/api/orders/notify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ orderId: params.id, status: newStatus })
+    })
+    toast.success(`Status updated to ${newStatus}`)
+  }
+
+  const saveTracking = async () => {
+    await supabase.from('orders').update({ tracking_number: tracking }).eq('id', params.id)
+    toast.success('Tracking number saved!')
+  }
+
+  if (loading) return (
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <p className="font-cormorant text-2xl text-gray-400">Loading order...</p>
+    </div>
+  )
+
+  if (!order) return (
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <p className="font-cormorant text-2xl text-gray-400">Order not found</p>
+    </div>
+  )
+
   return (
     <div className="min-h-screen bg-gray-50">
       <nav className="bg-[#1A0A0A] text-white px-6 py-4 flex items-center gap-6">
-        <Link href="/admin/orders" className="font-playfair text-xl font-black text-crimson">Back to Orders</Link>
+        <Link href="/admin/orders" className="font-playfair text-xl font-black text-crimson">← Orders</Link>
         <span className="font-cinzel text-xs tracking-widest text-gold uppercase">Order Detail</span>
       </nav>
+
       <div className="max-w-4xl mx-auto px-6 py-8">
+        {/* Header */}
         <div className="flex items-start justify-between mb-8">
           <div>
             <h1 className="font-playfair text-3xl font-black mb-1">{order.order_number}</h1>
             <p className="text-gray-500 text-sm">{new Date(order.created_at).toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
           </div>
           <div className="text-right">
-            <span className={`font-cinzel text-xs tracking-widest px-3 py-1.5 rounded uppercase ${statusColor[order.status] || 'bg-gray-100'}`}>{order.status}</span>
+            <span className={`font-cinzel text-xs tracking-widest px-3 py-1.5 rounded uppercase ${statusColor[status] || 'bg-gray-100'}`}>{status}</span>
             <p className="font-playfair text-2xl font-black text-crimson mt-2">£{order.total.toFixed(2)}</p>
           </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          {/* Customer */}
           <div className="bg-white border border-gray-100 rounded p-6">
             <h2 className="font-playfair text-lg font-bold mb-4">Customer Details</h2>
             <div className="space-y-2 text-sm">
@@ -59,6 +105,7 @@ export default async function AdminOrderDetailPage({ params }: { params: { id: s
             </div>
           </div>
 
+          {/* Address */}
           <div className="bg-white border border-gray-100 rounded p-6">
             <h2 className="font-playfair text-lg font-bold mb-4">Delivery Address</h2>
             <div className="text-sm space-y-1">
@@ -72,6 +119,7 @@ export default async function AdminOrderDetailPage({ params }: { params: { id: s
           </div>
         </div>
 
+        {/* Items */}
         <div className="bg-white border border-gray-100 rounded p-6 mb-6">
           <h2 className="font-playfair text-lg font-bold mb-4">Items Ordered</h2>
           <div className="space-y-4">
@@ -99,19 +147,27 @@ export default async function AdminOrderDetailPage({ params }: { params: { id: s
           </div>
         </div>
 
+        {/* Status */}
         <div className="bg-white border border-gray-100 rounded p-6 mb-6">
           <h2 className="font-playfair text-lg font-bold mb-2">Update Status</h2>
           <p className="text-sm text-gray-500 font-cormorant mb-4">Customer receives email when status changes</p>
-          <OrderStatusUpdater orderId={order.id} currentStatus={order.status} statuses={statuses}/>
+          <select value={status} onChange={e => updateStatus(e.target.value)}
+            className="border border-gray-200 font-cinzel text-xs tracking-widest px-4 py-2 bg-white focus:border-crimson outline-none uppercase cursor-pointer">
+            {statuses.map(s => <option key={s} value={s}>{s}</option>)}
+          </select>
         </div>
 
+        {/* Tracking */}
         <div className="bg-white border border-gray-100 rounded p-6">
           <h2 className="font-playfair text-lg font-bold mb-2">Tracking Number</h2>
-          {order.tracking_number && <p className="text-sm text-seagreen mb-3">Current: <strong>{order.tracking_number}</strong></p>}
+          <p className="text-sm text-gray-500 font-cormorant mb-4">Add tracking so customer can follow their delivery</p>
           <div className="flex gap-3">
-            <input id="tracking-input" defaultValue={order.tracking_number || ''} placeholder="Enter tracking number" className="input flex-1"/>
-            <button className="btn-crimson" onClick={() => {}}>Save</button>
+            <input value={tracking} onChange={e => setTracking(e.target.value)}
+              placeholder="e.g. Royal Mail tracking number"
+              className="input flex-1"/>
+            <button onClick={saveTracking} className="btn-crimson whitespace-nowrap">Save</button>
           </div>
+          {order.tracking_number && <p className="mt-3 text-sm text-seagreen">✓ Current: <strong>{order.tracking_number}</strong></p>}
         </div>
       </div>
     </div>
