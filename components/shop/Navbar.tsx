@@ -18,7 +18,7 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {[['Shop', '/shop'], ['Bridal', '/shop?category=bridal'], ['Casual', '/shop?category=casual'], ['Accessories', '/shop?category=accessories']].map(([l, h]) => (
+          {[['Shop', '/shop'], ['Bridal', '/shop?category=bridal'], ['Casual', '/shop?category=casual'], ['Accessories', '/shop?category=accessories'], ['Contact', '/contact']].map(([l, h]) => (
             <Link key={l} href={h} className="font-cinzel text-[11px] tracking-widest text-gray-700 hover:text-crimson uppercase transition-colors">{l}</Link>
           ))}
         </nav>
@@ -46,7 +46,7 @@ export default function Navbar() {
       {/* Mobile menu */}
       {open && (
         <div className="md:hidden bg-white border-t border-gray-100 px-6 py-4 flex flex-col gap-4">
-          {[['Shop All', '/shop'], ['Bridal Wear', '/shop?category=bridal'], ['Casual Wear', '/shop?category=casual'], ['Formal Wear', '/shop?category=formal'], ['Accessories', '/shop?category=accessories'], ['My Account', '/account']].map(([l, h]) => (
+          {[['Shop All', '/shop'], ['Bridal Wear', '/shop?category=bridal'], ['Casual Wear', '/shop?category=casual'], ['Formal Wear', '/shop?category=formal'], ['Accessories', '/shop?category=accessories'], ['Contact Us', '/contact'], ['My Account', '/account']].map(([l, h]) => (
             <Link key={l} href={h} onClick={() => setOpen(false)}
               className="font-cinzel text-xs tracking-widest text-gray-700 uppercase">{l}</Link>
           ))}
