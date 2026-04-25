@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hoorab's Collection — Pakistani Bridal & Casual Wear | London</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --crimson: #C41E3A;
+  --crimson-deep: #8B0000;
+  --crimson-light: #E8354F;
+  --gold: #C9A84C;
+  --gold-light: #F0C96E;
+  --gold-pale: #FDF3DC;
+  --sea-green: #2E8B6E;
+  --sea-green-light: #3DAA87;
+  --sea-blue: #1B6CA8;
+  --sea-blue-light: #2585CC;
+  --ivory: #FAF7F0;
+  --dark: #1A0A0A;
+  --dark2: #2D1515;
+  --text: #2C1810;
+  --text-muted: #7A5C52;
+  --border: rgba(201,168,76,0.25);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--ivory);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ── ORNAMENTAL PATTERNS ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse 80% 40% at 50% 0%, rgba(196,30,58,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 60% at 100% 100%, rgba(201,168,76,0.08) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── MARQUEE BANNER ── */
+.marquee-wrap {
+  background: var(--crimson);
+  color: #fff;
+  overflow: hidden;
+  padding: 8px 0;
+  position: relative;
+  z-index: 10;
+}
+.marquee-track {
+  display: flex;
+  gap: 0;
+  animation: marquee 30s linear infinite;
+  white-space: nowrap;
+}
+.marquee-track span {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  padding: 0 40px;
+}
+.marquee-track span.sep { color: var(--gold-light); }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ── HEADER ── */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250,247,240,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 40px;
+}
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.logo-main {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--crimson);
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+.logo-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+nav { display: flex; gap: 32px; align-items: center; }
+nav a {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s;
+  text-transform: uppercase;
+}
+nav a:hover { color: var(--crimson); }
+.nav-cta {
+  background: var(--crimson) !important;
+  color: #fff !important;
+  padding: 10px 22px;
+  border-radius: 2px;
+  font-size: 10px !important;
+}
+.nav-cta:hover { background: var(--crimson-deep) !important; }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 50%, #3D1010 100%);
+}
+.hero-bg-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(201,168,76,0.03) 0px, rgba(201,168,76,0.03) 1px, transparent 1px, transparent 40px),
+    repeating-linear-gradient(-45deg, rgba(201,168,76,0.03) 0px, rgba(201,168,76,0.03) 1px, transparent 1px, transparent 40px);
+}
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+.hero-orb-1 { width: 500px; height: 500px; background: rgba(196,30,58,0.3); top: -100px; right: -100px; }
+.hero-orb-2 { width: 400px; height: 400px; background: rgba(201,168,76,0.15); bottom: -50px; left: 200px; }
+.hero-orb-3 { width: 300px; height: 300px; background: rgba(27,108,168,0.2); top: 200px; left: -80px; }
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  width: 100%;
+}
+.hero-text { animation: fadeUp 0.9s ease both; }
+.hero-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: '';
+  display: block;
+  width: 30px;
+  height: 1px;
+  background: var(--gold);
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(44px, 5vw, 72px);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.05;
+  margin-bottom: 24px;
+}
+.hero-title em {
+  color: var(--gold-light);
+  font-style: italic;
+}
+.hero-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.7;
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  background: var(--crimson);
+  color: #fff;
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: all 0.3s;
+  border: 2px solid var(--crimson);
+}
+.btn-primary:hover { background: var(--crimson-light); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(196,30,58,0.4); }
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  background: transparent;
+  color: var(--gold-light);
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+  border-radius: 2px;
+  border: 2px solid var(--gold);
+  transition: all 0.3s;
+}
+.btn-gold:hover { background: var(--gold); color: var(--dark); transform: translateY(-2px); }
+
+.hero-visual {
+  position: relative;
+  animation: fadeUp 0.9s 0.2s ease both;
+}
+.hero-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.hero-card {
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 3/4;
+  cursor: pointer;
+}
+.hero-card:first-child { margin-top: 40px; }
+.hero-card-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+  position: relative;
+}
+.hc-bridal { background: linear-gradient(160deg, #8B0000 0%, #C41E3A 40%, #E8354F 100%); }
+.hc-casual { background: linear-gradient(160deg, #1A5C46 0%, #2E8B6E 50%, #3DAA87 100%); }
+.hc-blue { background: linear-gradient(160deg, #0D3D6B 0%, #1B6CA8 50%, #2585CC 100%); }
+.hc-acc { background: linear-gradient(160deg, #6B4C11 0%, #C9A84C 60%, #F0C96E 100%); }
+
+.hero-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-card-label {
+  position: relative;
+  z-index: 1;
+}
+.hero-card-label span {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+.hero-card-label small {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.7);
+  text-transform: uppercase;
+}
+
+/* Ornamental motif on cards */
+.hero-card-motif {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 50px;
+  height: 50px;
+  opacity: 0.3;
+}
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:none; } }
+
+/* ── SECTION COMMON ── */
+section { position: relative; z-index: 1; }
+.section-wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+.section-header { text-align: center; margin-bottom: 60px; }
+.section-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+.section-eyebrow::before, .section-eyebrow::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.5;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.section-title em { color: var(--crimson); font-style: italic; }
+.section-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* ── COLLECTION / CATEGORIES ── */
+.categories { padding: 100px 0; background: var(--ivory); }
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.cat-card {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  group: true;
+  text-decoration: none;
+}
+.cat-card-body {
+  aspect-ratio: 2/3;
+  display: flex;
+  align-items: flex-end;
+  padding: 28px 22px;
+  position: relative;
+  transition: transform 0.4s ease;
+}
+.cat-card:hover .cat-card-body { transform: scale(1.02); }
+.cat-bg-bridal {
+  background: linear-gradient(180deg, rgba(139,0,0,0.4) 0%, rgba(196,30,58,0.85) 60%, #8B0000 100%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 20px);
+}
+.cat-bg-casual {
+  background: linear-gradient(180deg, rgba(30,100,70,0.4) 0%, rgba(46,139,110,0.85) 60%, #1A5C46 100%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 20px);
+}
+.cat-bg-blue {
+  background: linear-gradient(180deg, rgba(13,61,107,0.4) 0%, rgba(27,108,168,0.85) 60%, #0D3D6B 100%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 20px);
+}
+.cat-bg-acc {
+  background: linear-gradient(180deg, rgba(107,76,17,0.4) 0%, rgba(201,168,76,0.85) 60%, #6B4C11 100%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 20px);
+}
+.cat-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  transition: background 0.3s;
+}
+.cat-card:hover .cat-overlay { background: rgba(0,0,0,0.1); }
+
+/* Paisley SVG pattern overlay */
+.cat-card-body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='40' cy='40' r='20' fill='none' stroke='white' stroke-width='0.5' stroke-opacity='0.1'/%3E%3Ccircle cx='40' cy='40' r='30' fill='none' stroke='white' stroke-width='0.5' stroke-opacity='0.07'/%3E%3C/svg%3E");
+  background-size: 80px 80px;
+}
+
+.cat-info { position: relative; z-index: 1; }
+.cat-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.9);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.cat-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+.cat-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  color: rgba(255,255,255,0.75);
+  font-weight: 300;
+}
+.cat-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.7);
+  text-transform: uppercase;
+  margin-top: 14px;
+  transition: gap 0.2s;
+}
+.cat-card:hover .cat-arrow { gap: 10px; color: #fff; }
+
+/* ── WHY US ── */
+.why-us { padding: 80px 0; background: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 100%); }
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.why-card {
+  padding: 48px 36px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(201,168,76,0.12);
+  text-align: center;
+  transition: background 0.3s;
+}
+.why-card:hover { background: rgba(255,255,255,0.06); }
+.why-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 24px;
+}
+.wi-red { background: rgba(196,30,58,0.2); border: 1px solid rgba(196,30,58,0.3); }
+.wi-gold { background: rgba(201,168,76,0.2); border: 1px solid rgba(201,168,76,0.3); }
+.wi-green { background: rgba(46,139,110,0.2); border: 1px solid rgba(46,139,110,0.3); }
+.why-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.why-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ── HOW TO ORDER ── */
+.how-order { padding: 100px 0; background: var(--ivory); }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 60px; }
+.step {
+  text-align: center;
+  position: relative;
+}
+.step::after {
+  content: '→';
+  position: absolute;
+  right: -24px;
+  top: 28px;
+  font-size: 24px;
+  color: var(--gold);
+  opacity: 0.4;
+}
+.step:last-child::after { display: none; }
+.step-num {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--crimson);
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  box-shadow: 0 8px 30px rgba(196,30,58,0.3);
+}
+.step-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.step-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ── CTA STRIP ── */
+.cta-strip {
+  padding: 80px 40px;
+  background: var(--crimson);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-strip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 30px);
+}
+.cta-strip-inner { position: relative; z-index: 1; }
+.cta-strip h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.cta-strip p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 36px;
+  font-weight: 300;
+}
+.cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 36px;
+  background: #25D366;
+  color: #fff;
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-decoration: none;
+  border-radius: 2px;
+  border: 2px solid #25D366;
+  transition: all 0.3s;
+  font-weight: 600;
+}
+.btn-wa:hover { background: #1da851; transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+.btn-call {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 36px;
+  background: transparent;
+  color: #fff;
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-decoration: none;
+  border-radius: 2px;
+  border: 2px solid rgba(255,255,255,0.6);
+  transition: all 0.3s;
+}
+.btn-call:hover { border-color: #fff; background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+/* ── SOCIAL PROOF ── */
+.social-proof { padding: 80px 0; background: var(--gold-pale); }
+.testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.tcard {
+  background: #fff;
+  border-radius: 4px;
+  padding: 32px 28px;
+  border-left: 4px solid var(--crimson);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
+.tcard-stars { color: var(--gold); font-size: 16px; margin-bottom: 14px; letter-spacing: 2px; }
+.tcard-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  color: var(--text);
+  line-height: 1.7;
+  font-style: italic;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+.tcard-name {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* ── SOCIAL MEDIA SECTION ── */
+.social-media { padding: 80px 0; background: var(--ivory); }
+.social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.sm-card {
+  border-radius: 4px;
+  padding: 36px 28px;
+  text-align: center;
+  transition: transform 0.3s;
+  text-decoration: none;
+}
+.sm-card:hover { transform: translateY(-4px); }
+.sm-insta { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); }
+.sm-fb { background: #1877F2; }
+.sm-tiktok { background: #000; }
+.sm-icon { font-size: 40px; margin-bottom: 14px; }
+.sm-name {
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  letter-spacing: 0.15em;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.sm-handle {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 16px;
+}
+.sm-follow {
+  display: inline-block;
+  padding: 8px 20px;
+  border: 1px solid rgba(255,255,255,0.5);
+  border-radius: 999px;
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--dark);
+  padding: 60px 40px 30px;
+}
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 60px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+  margin-bottom: 30px;
+}
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--crimson);
+  margin-bottom: 12px;
+}
+.footer-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+.footer-contact a {
+  display: block;
+  color: var(--gold-light);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  margin-bottom: 6px;
+  transition: color 0.2s;
+}
+.footer-contact a:hover { color: #fff; }
+.footer-col h4 {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.footer-col a {
+  display: block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  margin-bottom: 10px;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: #fff; }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.footer-copy {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+}
+.footer-made {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: rgba(201,168,76,0.4);
+  text-transform: uppercase;
+}
+
+/* Divider ornament */
+.ornament {
+  text-align: center;
+  color: var(--gold);
+  font-size: 20px;
+  opacity: 0.4;
+  letter-spacing: 8px;
+  margin: 20px 0;
+}
+
+/* ── FLOATING WHATSAPP ── */
+.float-wa {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 60px;
+  height: 60px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  text-decoration: none;
+  box-shadow: 0 8px 30px rgba(37,211,102,0.4);
+  z-index: 999;
+  transition: transform 0.3s;
+  animation: pulse-wa 2s infinite;
+}
+.float-wa:hover { transform: scale(1.1); }
+@keyframes pulse-wa {
+  0%, 100% { box-shadow: 0 8px 30px rgba(37,211,102,0.4); }
+  50% { box-shadow: 0 8px 50px rgba(37,211,102,0.7); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .hero-content { grid-template-columns: 1fr; gap: 40px; }
+  .hero-visual { display: none; }
+  .cat-grid { grid-template-columns: 1fr 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
+  .testimonials { grid-template-columns: 1fr; }
+  .social-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; gap: 30px; }
+  header { padding: 0 20px; }
+  nav { display: none; }
+  .section-wrap { padding: 0 20px; }
+  .hero-content { padding: 0 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/4487662193" class="float-wa" target="_blank" title="Order on WhatsApp">💬</a>
+
+<!-- Marquee -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>✦ Hoorab's Collection</span><span class="sep">◆</span>
+    <span>Pakistani Bridal Wear</span><span class="sep">◆</span>
+    <span>Casual Lawn & Chiffon</span><span class="sep">◆</span>
+    <span>Premium Accessories</span><span class="sep">◆</span>
+    <span>London, United Kingdom</span><span class="sep">◆</span>
+    <span>Order via WhatsApp</span><span class="sep">◆</span>
+    <span>✦ Hoorab's Collection</span><span class="sep">◆</span>
+    <span>Pakistani Bridal Wear</span><span class="sep">◆</span>
+    <span>Casual Lawn & Chiffon</span><span class="sep">◆</span>
+    <span>Premium Accessories</span><span class="sep">◆</span>
+    <span>London, United Kingdom</span><span class="sep">◆</span>
+    <span>Order via WhatsApp</span><span class="sep">◆</span>
+  </div>
+</div>
+
+<!-- Header -->
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-main">Hoorab's Collection</div>
+      <div class="logo-sub">Pakistani Couture · London</div>
+    </div>
+    <nav>
+      <a href="#collections">Collections</a>
+      <a href="#how-to-order">How to Order</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+      <a href="https://wa.me/4487662193" class="nav-cta" target="_blank">📱 Order Now</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-orb hero-orb-3"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Pakistani Couture · London</div>
+      <h1 class="hero-title">
+        Elegance Woven<br>in Every <em>Thread</em>
+      </h1>
+      <p class="hero-desc">
+        Exquisite Pakistani bridal and casual wear, handpicked and delivered to your door in London and across the UK. From bold crimson bridal ensembles to breezy sea-green casuals.
+      </p>
+      <div class="hero-actions">
+        <a href="https://wa.me/4487662193?text=Assalamu%20Alaikum!%20I%20would%20like%20to%20enquire%20about%20your%20collection." class="btn-primary" target="_blank">
+          💬 WhatsApp to Order
+        </a>
+        <a href="#collections" class="btn-gold">View Collections</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-cards">
+        <div class="hero-card">
+          <div class="hero-card-inner hc-bridal">
+            <svg class="hero-card-motif" viewBox="0 0 50 50" fill="none">
+              <path d="M25 5 L45 25 L25 45 L5 25 Z" stroke="white" stroke-width="1" fill="none" opacity="0.4"/>
+              <circle cx="25" cy="25" r="10" stroke="white" stroke-width="1" fill="none" opacity="0.3"/>
+            </svg>
+            <div class="hero-card-label">
+              <span>Bridal Wear</span>
+              <small>Crimson Collection</small>
+            </div>
+          </div>
+        </div>
+        <div class="hero-card" style="margin-top:40px">
+          <div class="hero-card-inner hc-casual">
+            <div class="hero-card-label">
+              <span>Casual Wear</span>
+              <small>Sea Green</small>
+            </div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-inner hc-blue">
+            <div class="hero-card-label">
+              <span>Formal</span>
+              <small>Sea Blue</small>
+            </div>
+          </div>
+        </div>
+        <div class="hero-card" style="margin-top:-40px">
+          <div class="hero-card-inner hc-acc">
+            <div class="hero-card-label">
+              <span>Accessories</span>
+              <small>Gold Jewellery</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Collections -->
+<section class="categories" id="collections">
+  <div class="section-wrap">
+    <div class="section-header">
+      <div class="section-eyebrow">Our Collections</div>
+      <h2 class="section-title">Dressed for Every <em>Occasion</em></h2>
+      <p class="section-sub">From grand wedding celebrations to everyday elegance — find your perfect outfit</p>
+    </div>
+    <div class="cat-grid">
+      <a class="cat-card" href="https://wa.me/4487662193?text=I'm%20interested%20in%20Bridal%20wear" target="_blank">
+        <div class="cat-card-body cat-bg-bridal">
+          <div class="cat-overlay"></div>
+          <div class="cat-info">
+            <div class="cat-tag">New Arrivals</div>
+            <div class="cat-name">Bridal Wear</div>
+            <div class="cat-desc">Lehengas, Sharara suits & Bridal dupatta sets in bold crimson & gold</div>
+            <div class="cat-arrow">Enquire Now →</div>
+          </div>
+        </div>
+      </a>
+      <a class="cat-card" href="https://wa.me/4487662193?text=I'm%20interested%20in%20Casual%20wear" target="_blank">
+        <div class="cat-card-body cat-bg-casual">
+          <div class="cat-overlay"></div>
+          <div class="cat-info">
+            <div class="cat-tag">Bestseller</div>
+            <div class="cat-name">Casual Wear</div>
+            <div class="cat-desc">Lawn, chiffon & cotton suits in sea green & floral prints for everyday wear</div>
+            <div class="cat-arrow">Enquire Now →</div>
+          </div>
+        </div>
+      </a>
+      <a class="cat-card" href="https://wa.me/4487662193?text=I'm%20interested%20in%20Formal%20wear" target="_blank">
+        <div class="cat-card-body cat-bg-blue">
+          <div class="cat-overlay"></div>
+          <div class="cat-info">
+            <div class="cat-tag">Popular</div>
+            <div class="cat-name">Formal Wear</div>
+            <div class="cat-desc">Elegant sea-blue chiffon & silk suits for Eid, weddings & parties</div>
+            <div class="cat-arrow">Enquire Now →</div>
+          </div>
+        </div>
+      </a>
+      <a class="cat-card" href="https://wa.me/4487662193?text=I'm%20interested%20in%20Accessories" target="_blank">
+        <div class="cat-card-body cat-bg-acc">
+          <div class="cat-overlay"></div>
+          <div class="cat-info">
+            <div class="cat-tag">Trending</div>
+            <div class="cat-name">Accessories</div>
+            <div class="cat-desc">Jewellery sets, dupattas, clutches & bridal accessories to complete your look</div>
+            <div class="cat-arrow">Enquire Now →</div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Why Us -->
+<section class="why-us">
+  <div class="section-wrap">
+    <div class="section-header">
+      <div class="section-eyebrow" style="color:var(--gold)">Why Choose Us</div>
+      <h2 class="section-title" style="color:#fff">The <em style="color:var(--gold-light)">Hoorab's</em> Promise</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon wi-red">🧵</div>
+        <div class="why-title">Premium Quality</div>
+        <div class="why-desc">Every piece is carefully sourced from Pakistan's finest designers and fabric houses. Pure silks, chiffons & handwork embroideries.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon wi-gold">🚚</div>
+        <div class="why-title">UK-Wide Delivery</div>
+        <div class="why-desc">Based in London, we deliver across the entire United Kingdom. Fast, safe, and beautifully packaged for gifting too.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon wi-green">💬</div>
+        <div class="why-title">Personal Service</div>
+        <div class="why-desc">Order directly via WhatsApp and speak to us personally. We help you choose the right size, colour and style for any occasion.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How to Order -->
+<section class="how-order" id="how-to-order">
+  <div class="section-wrap">
+    <div class="section-header">
+      <div class="section-eyebrow">Simple Process</div>
+      <h2 class="section-title">How to <em>Order</em></h2>
+      <p class="section-sub">Getting your dream outfit is just 3 easy steps away</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title">Browse & Choose</div>
+        <div class="step-desc">Browse our collections here on the website or message us on WhatsApp to see the latest arrivals, prices and available sizes.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title">WhatsApp Us</div>
+        <div class="step-desc">Send us a message on WhatsApp at <strong>+44 876 621 936</strong> with the item you want. We'll confirm availability and give you a price.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title">Pay & Receive</div>
+        <div class="step-desc">Pay securely via bank transfer or cash on collection. We'll dispatch your order and deliver it beautifully packaged to your door.</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:50px">
+      <a href="https://wa.me/4487662193?text=Assalamu%20Alaikum!%20I%20would%20like%20to%20place%20an%20order." class="btn-primary" style="display:inline-flex;" target="_blank">
+        💬 Start Your Order on WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Strip -->
+<div class="cta-strip">
+  <div class="cta-strip-inner">
+    <h2>Ready to Find Your Perfect Outfit?</h2>
+    <p>Message us now — we'd love to help you look stunning for your next occasion</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/4487662193?text=Assalamu%20Alaikum!%20I%20would%20like%20to%20enquire%20about%20your%20collection." class="btn-wa" target="_blank">
+        💬 WhatsApp Us Now
+      </a>
+      <a href="tel:+4487662193" class="btn-call">
+        📞 Call Us
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Reviews -->
+<section class="social-proof" id="reviews">
+  <div class="section-wrap">
+    <div class="section-header">
+      <div class="section-eyebrow">Customer Love</div>
+      <h2 class="section-title">What Our <em>Customers</em> Say</h2>
+    </div>
+    <div class="testimonials">
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <div class="tcard-text">"Absolutely gorgeous bridal lehenga! The red colour was exactly as shown, the embroidery was stunning. Got so many compliments at the wedding. Will definitely order again!"</div>
+        <div class="tcard-name">— Sana R., Birmingham</div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <div class="tcard-text">"Ordered a sea green casual suit for Eid and it arrived beautifully packaged. The fabric quality is amazing — pure lawn. Hoorab is so helpful and responds quickly on WhatsApp."</div>
+        <div class="tcard-name">— Fatima K., London</div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <div class="tcard-text">"My go-to for Pakistani clothes in the UK. The accessories collection is gorgeous — I ordered a full jewellery set and it was perfect for my sister's wedding. Amazing service!"</div>
+        <div class="tcard-name">— Zara M., Manchester</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Social Media -->
+<section class="social-media" id="contact">
+  <div class="section-wrap">
+    <div class="section-header">
+      <div class="section-eyebrow">Stay Connected</div>
+      <h2 class="section-title">Follow Us on <em>Social Media</em></h2>
+      <p class="section-sub">See new arrivals, styling inspiration & behind-the-scenes on our socials</p>
+    </div>
+    <div class="social-grid">
+      <a class="sm-card sm-insta" href="#" target="_blank">
+        <div class="sm-icon">📸</div>
+        <div class="sm-name">Instagram</div>
+        <div class="sm-handle">@hoorabscollection</div>
+        <div class="sm-follow">Follow Us</div>
+      </a>
+      <a class="sm-card sm-fb" href="#" target="_blank">
+        <div class="sm-icon">📘</div>
+        <div class="sm-name">Facebook</div>
+        <div class="sm-handle">Hoorab's Collection</div>
+        <div class="sm-follow">Like Our Page</div>
+      </a>
+      <a class="sm-card sm-tiktok" href="#" target="_blank">
+        <div class="sm-icon">🎵</div>
+        <div class="sm-name">TikTok</div>
+        <div class="sm-handle">@hoorabscollection</div>
+        <div class="sm-follow">Follow Us</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">Hoorab's Collection</div>
+        <div class="footer-tagline">Bringing the finest Pakistani bridal and casual wear to the heart of London. Elegance, quality and personal service — always.</div>
+        <div class="footer-contact">
+          <a href="https://wa.me/4487662193" target="_blank">💬 WhatsApp: +44 876 621 936</a>
+          <a href="tel:+4487662193">📞 Call: +44 876 621 936</a>
+          <a href="#">📍 London, United Kingdom</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Collections</h4>
+        <a href="https://wa.me/4487662193?text=Bridal wear enquiry" target="_blank">Bridal Wear</a>
+        <a href="https://wa.me/4487662193?text=Casual wear enquiry" target="_blank">Casual Wear</a>
+        <a href="https://wa.me/4487662193?text=Formal wear enquiry" target="_blank">Formal Wear</a>
+        <a href="https://wa.me/4487662193?text=Accessories enquiry" target="_blank">Accessories</a>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="#how-to-order">How to Order</a>
+        <a href="#reviews">Reviews</a>
+        <a href="https://wa.me/4487662193" target="_blank">WhatsApp Us</a>
+        <a href="tel:+4487662193">Call Us</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Hoorab's Collection. London, United Kingdom. All rights reserved.</div>
+      <div class="footer-made">Made with ♥ for Pakistani Fashion</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal animation
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.cat-card, .why-card, .step, .tcard, .sm-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(24px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
