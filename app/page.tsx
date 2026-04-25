@@ -74,14 +74,26 @@ export default async function HomePage() {
             </div>
           </div>
 
-          {/* Category cards grid */}
+          {/* Category cards grid with real photos */}
           <div className="hidden lg:grid grid-cols-2 gap-3">
             {(categories || []).map((cat, i) => (
               <Link key={cat.id} href={`/shop?category=${cat.slug}`}
-                className={`rounded relative overflow-hidden aspect-[3/4] flex items-end p-5 bg-gradient-to-b ${catColors[cat.slug] || 'from-gray-700 to-gray-900'} group ${i % 2 === 0 ? 'mt-8' : ''}`}>
-                <div>
-                  <p className="font-playfair text-white font-bold text-lg">{cat.name}</p>
-                  <p className="font-cinzel text-white/60 text-xs tracking-widest mt-1 group-hover:text-white transition-colors">Shop Now →</p>
+                className={`rounded relative overflow-hidden aspect-[3/4] flex items-end p-5 group ${i % 2 === 0 ? 'mt-8' : ''}`}>
+                {/* Photo background */}
+                <div className="absolute inset-0 bg-gray-900">
+                  {cat.image_url && (
+                    <img src={cat.image_url} alt={cat.name}
+                      className="w-full h-full object-cover object-top opacity-90 group-hover:scale-105 transition-transform duration-700"/>
+                  )}
+                  {!cat.image_url && (
+                    <div className={`w-full h-full bg-gradient-to-b ${catOverlay[cat.slug] || 'from-gray-700 to-gray-900'}`}/>
+                  )}
+                </div>
+                {/* Dark gradient at bottom for text */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"/>
+                <div className="relative z-10">
+                  <p className="font-playfair text-white font-bold text-lg drop-shadow-lg">{cat.name}</p>
+                  <p className="font-cinzel text-white/70 text-xs tracking-widest mt-1 group-hover:text-white transition-colors">Shop Now →</p>
                 </div>
               </Link>
             ))}
