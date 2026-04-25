@@ -18,11 +18,17 @@ export default async function HomePage() {
     .select('*')
     .order('sort_order')
 
-  const catColors: Record<string, string> = {
-    bridal: 'from-crimson-deep via-crimson to-crimson-light',
-    casual: 'from-seagreen to-seagreen-light',
-    formal: 'from-seablue to-seablue-light',
-    accessories: 'from-yellow-800 via-gold to-gold-light',
+  const catOverlay: Record<string, string> = {
+    bridal: 'from-crimson-deep/70 to-transparent',
+    casual: 'from-seagreen/70 to-transparent',
+    formal: 'from-seablue/70 to-transparent',
+    accessories: 'from-yellow-900/70 to-transparent',
+  }
+  const catFallback: Record<string, string> = {
+    bridal: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?w=600&q=80',
+    casual: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&q=80',
+    formal: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&q=80',
+    accessories: 'https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&q=80',
   }
 
   return (
@@ -95,12 +101,23 @@ export default async function HomePage() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
             {(categories || []).map(cat => (
               <Link key={cat.id} href={`/shop?category=${cat.slug}`}
-                className={`relative overflow-hidden rounded aspect-[2/3] flex items-end p-6 bg-gradient-to-b ${catColors[cat.slug] || 'from-gray-700 to-gray-900'} group`}>
-                <div className="relative z-10">
+                className="relative overflow-hidden rounded aspect-[2/3] flex items-end group">
+                {/* Background image — uses image_url from Supabase, fallback to default */}
+                <div className="absolute inset-0 bg-gray-900">
+                  <img
+                    src={cat.image_url || catFallback[cat.slug] || ''}
+                    alt={cat.name}
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 opacity-90"
+                  />
+                </div>
+                {/* Gradient overlay */}
+                <div className={`absolute inset-0 bg-gradient-to-t ${catOverlay[cat.slug] || 'from-gray-900/80 to-transparent'}`}/>
+                {/* Content */}
+                <div className="relative z-10 p-6">
                   <span className="inline-block bg-white/15 border border-white/30 rounded-full px-3 py-1 font-cinzel text-white text-[9px] tracking-widest mb-2 uppercase">Collection</span>
-                  <p className="font-playfair text-white font-bold text-2xl leading-tight">{cat.name}</p>
-                  <p className="font-cormorant text-white/70 text-sm mt-1 font-light">{cat.description}</p>
-                  <p className="font-cinzel text-white/60 text-[10px] tracking-widest mt-3 group-hover:text-white group-hover:gap-3 transition-all">Explore →</p>
+                  <p className="font-playfair text-white font-bold text-2xl leading-tight drop-shadow-lg">{cat.name}</p>
+                  <p className="font-cormorant text-white/80 text-sm mt-1 font-light">{cat.description}</p>
+                  <p className="font-cinzel text-white/70 text-[10px] tracking-widest mt-3 group-hover:text-white transition-all">Explore →</p>
                 </div>
               </Link>
             ))}
