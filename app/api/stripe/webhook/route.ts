@@ -39,9 +39,10 @@ export async function POST(req: NextRequest) {
       const discount = parseFloat(session.metadata?.discount_amount || '0') || 0
       const total = session.amount_total! / 100
 
-      // Generate order number
-      const timestamp = Date.now().toString().slice(-5)
-      const orderNumber = `HC-${timestamp}`
+      // Generate order number from database sequence
+      const { data: orderNumData } = await supabase.rpc('generate_order_number')
+      const orderNumber = orderNumData || `HC-${Date.now().toString().slice(-5)}`
+      console.log('Generated order number:', orderNumber)
 
       // Create order
       const { data: order, error } = await supabase.from('orders').insert({
