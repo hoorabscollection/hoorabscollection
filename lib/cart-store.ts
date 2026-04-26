@@ -49,7 +49,12 @@ export const useCart = create<CartStore>()(
         }
       },
 
-      removeItem: (id) => set(s => ({ items: s.items.filter(i => i.id !== id) })),
+      removeItem: (id) => set(s => {
+        const newItems = s.items.filter(i => i.id !== id)
+        // Clear promo if cart becomes empty
+        if (newItems.length === 0) return { items: [], promoCode: '', discount: 0 }
+        return { items: newItems }
+      }),
 
       updateQty: (id, qty) => {
         if (qty < 1) { get().removeItem(id); return }
@@ -64,7 +69,9 @@ export const useCart = create<CartStore>()(
 
       total: () => {
         const sub = get().subtotal()
-        return Math.max(0, sub - get().discount)
+        // Cap discount at subtotal so total never goes negative
+        const disc = Math.min(get().discount, sub)
+        return Math.max(0, sub - disc)
       },
 
       itemCount: () => get().items.reduce((n, i) => n + i.quantity, 0),
