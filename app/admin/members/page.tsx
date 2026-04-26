@@ -9,7 +9,7 @@ export default async function AdminMembersPage() {
 
   const { data: members, count } = await supabase
     .from('profiles')
-    .select('*, orders(count)', { count: 'exact' })
+    .select('*', { count: 'exact' })
     .order('created_at', { ascending: false })
 
   return (
