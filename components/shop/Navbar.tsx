@@ -13,7 +13,26 @@ export default function Navbar() {
   useEffect(() => {
     const supabase = createClient()
     supabase.auth.getUser().then(({ data: { user } }) => {
-      if (user) loadFromDb(user.id)
+      if (user) {
+        // Load cart from database on mount
+        loadFromDb(user.id)
+
+        // Subscribe to real-time cart changes
+        const channel = supabase
+          .channel('cart-changes')
+          .on('postgres_changes', {
+            event: '*',
+            schema: 'public',
+            table: 'carts',
+            filter: `user_id=eq.${user.id}`
+          }, () => {
+            // Reload cart when it changes in any tab
+            loadFromDb(user.id)
+          })
+          .subscribe()
+
+        return () => { supabase.removeChannel(channel) }
+      }
     })
   }, [])
   const [open, setOpen] = useState(false)
