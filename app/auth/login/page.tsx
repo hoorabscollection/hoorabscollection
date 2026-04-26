@@ -24,7 +24,7 @@ export default function LoginPage() {
       if (email === process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
         window.location.href = '/admin'
       } else {
-        window.location.href = '/account'
+        window.location.href = '/'
       }
     }
     setLoading(false)
