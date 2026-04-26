@@ -25,9 +25,9 @@ export default function Navbar() {
             schema: 'public',
             table: 'carts',
             filter: `user_id=eq.${user.id}`
-          }, () => {
+          }, async (payload) => {
             // Reload cart when it changes in any tab
-            loadFromDb(user.id)
+            await loadFromDb(user.id)
           })
           .subscribe()
 

@@ -159,11 +159,13 @@ export const useCart = create<CartStore>()(
             .eq('user_id', userId)
             .single()
 
-          if (data && data.items && data.items.length > 0) {
+          if (data) {
+            // Always sync from database — including empty cart
             set({
-              items: data.items,
+              items: data.items || [],
               promoCode: data.promo_code || '',
               discount: data.discount_amount || 0,
+              promoData: null,
             })
           }
         } catch (err) {
