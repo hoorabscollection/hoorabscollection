@@ -17,14 +17,14 @@ export default function CartPage() {
     setPromoLoading(true)
     const res = await fetch('/api/promotions/validate', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ code: promo, subtotal: subtotal() })
+      body: JSON.stringify({ code: promo, order_total: subtotal() })
     })
     const data = await res.json()
-    if (data.valid) {
-      setPromo(promo.toUpperCase(), data.discount)
-      toast.success(`Promo applied! You save £${data.discount.toFixed(2)}`)
+    if (data.success) {
+      setPromo(promo.toUpperCase(), data.discount_amount)
+      toast.success(data.message || `Promo applied!`)
     } else {
-      toast.error(data.message || 'Invalid promo code')
+      toast.error(data.error || 'Invalid promo code')
     }
     setPromoLoading(false)
   }
