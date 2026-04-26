@@ -1,11 +1,21 @@
 'use client'
 import Link from 'next/link'
 import { useCart } from '@/lib/cart-store'
+import { createClient } from '@/lib/supabase'
+import { useEffect } from 'react'
 import { ShoppingBag, User, Menu, X } from 'lucide-react'
 import { useState } from 'react'
 
 export default function Navbar() {
   const count = useCart(s => s.itemCount())
+  const loadFromDb = useCart(s => s.loadFromDb)
+
+  useEffect(() => {
+    const supabase = createClient()
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (user) loadFromDb(user.id)
+    })
+  }, [])
   const [open, setOpen] = useState(false)
 
   return (
