@@ -72,7 +72,7 @@ export default async function AdminDashboard() {
         {/* Quick actions */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
           <Link href="/admin/products/new" className="btn-crimson text-center text-xs py-3">+ Add Product</Link>
-          <Link href="/admin/promotions/new" className="btn-outline text-center text-xs py-3">+ Create Promo</Link>
+          <Link href="/admin/promotions" className="btn-outline text-center text-xs py-3">+ Create Promo</Link>
           <Link href="/admin/members/email" className="bg-seagreen text-white font-cinzel text-xs tracking-widest py-3 text-center uppercase hover:bg-seagreen-light transition-colors">📧 Email Members</Link>
           <Link href="/admin/orders" className="bg-seablue text-white font-cinzel text-xs tracking-widest py-3 text-center uppercase hover:bg-seablue-light transition-colors">📦 View All Orders</Link>
         </div>
