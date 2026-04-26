@@ -19,10 +19,10 @@ export default async function HomePage() {
     .order('sort_order')
 
   const catOverlay: Record<string, string> = {
-    bridal: 'from-crimson-deep/70 to-transparent',
-    casual: 'from-seagreen/70 to-transparent',
-    formal: 'from-seablue/70 to-transparent',
-    accessories: 'from-yellow-900/70 to-transparent',
+    bridal: 'from-crimson-deep/40 to-transparent',
+    casual: 'from-seagreen/40 to-transparent',
+    formal: 'from-seablue/40 to-transparent',
+    accessories: 'from-yellow-900/40 to-transparent',
   }
   const catFallback: Record<string, string> = {
     bridal: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?w=600&q=80',
@@ -83,7 +83,7 @@ export default async function HomePage() {
                 <div className="absolute inset-0 bg-gray-900">
                   {cat.image_url && (
                     <img src={cat.image_url} alt={cat.name}
-                      className="w-full h-full object-cover object-top opacity-90 group-hover:scale-105 transition-transform duration-700"/>
+                      className="w-full h-full object-cover object-top opacity-100 group-hover:scale-105 transition-transform duration-700"/>
                   )}
                   {!cat.image_url && (
                     <div className={`w-full h-full bg-gradient-to-b ${catOverlay[cat.slug] || 'from-gray-700 to-gray-900'}`}/>
@@ -119,7 +119,7 @@ export default async function HomePage() {
                   <img
                     src={cat.image_url || catFallback[cat.slug] || ''}
                     alt={cat.name}
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 opacity-90"
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
                   />
                 </div>
                 {/* Gradient overlay */}
