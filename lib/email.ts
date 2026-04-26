@@ -35,7 +35,7 @@ export async function sendOrderConfirmationToCustomer(order: any) {
         </table>
         <p style="text-align:right;font-size:18px;color:#1A0A0A"><strong>Total: £${order.total.toFixed(2)}</strong></p>
         <hr style="border:1px solid #C9A84C;opacity:0.3;margin:24px 0"/>
-        <p style="color:#555">Questions? WhatsApp us at <strong>+44 876 621 936</strong></p>
+        <p style="color:#555">Questions? WhatsApp us at <strong>+44 787 662 1936</strong></p>
         <p style="color:#C9A84C;font-size:11px;text-align:center;margin-top:30px">© Hoorab's Collection · London, UK</p>
       </div>
     `
@@ -86,7 +86,7 @@ export async function sendOrderStatusUpdate(order: any) {
         <p>Hi ${order.customer_name},</p>
         <p style="font-size:18px;color:#1A0A0A">${msg}</p>
         <p><strong>Order:</strong> ${order.order_number}</p>
-        <p style="color:#555">Questions? WhatsApp us at <strong>+44 876 621 936</strong></p>
+        <p style="color:#555">Questions? WhatsApp us at <strong>+44 787 662 1936</strong></p>
       </div>
     `
   })
