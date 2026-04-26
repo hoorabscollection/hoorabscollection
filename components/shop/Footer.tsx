@@ -11,8 +11,8 @@ export default function Footer() {
               Bringing the finest Pakistani bridal and casual wear to London. Elegance, quality and personal service — always.
             </p>
             <div className="space-y-2">
-              <a href="https://wa.me/4487662193" target="_blank" className="block text-gold-light font-dm-sans text-sm hover:text-white transition-colors">💬 WhatsApp: +44 876 621 936</a>
-              <a href="tel:+4487662193" className="block text-gold-light text-sm hover:text-white transition-colors">📞 +44 876 621 936</a>
+              <a href="https://wa.me/447876621936" target="_blank" className="block text-gold-light font-dm-sans text-sm hover:text-white transition-colors">💬 WhatsApp: +44 787 662 1936</a>
+              <a href="tel:+447876621936" className="block text-gold-light text-sm hover:text-white transition-colors">📞 +44 787 662 1936</a>
               <span className="block text-white/40 text-sm">📍 London, United Kingdom</span>
             </div>
           </div>
