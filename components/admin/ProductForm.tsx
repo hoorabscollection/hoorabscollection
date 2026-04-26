@@ -28,6 +28,7 @@ export default function ProductForm({ product, categories }: { product?: any; ca
     colours: product?.colours || [],
     sizes: product?.sizes || [],
     tags: product?.tags || [],
+    size_prices: product?.size_prices || {},
   })
 
   const setField = (k: string, v: any) => setForm(f => ({ ...f, [k]: v }))
@@ -163,6 +164,31 @@ export default function ProductForm({ product, categories }: { product?: any; ca
           ))}
         </div>
       </div>
+
+      {/* Size Prices */}
+      {form.sizes.length > 0 && (
+        <div className="mb-6">
+          <label className="block font-cinzel text-xs tracking-widest text-gray-500 uppercase mb-2">
+            Size-Based Pricing (optional — leave blank to use default price)
+          </label>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {form.sizes.map((size: string) => (
+              <div key={size}>
+                <label className="block font-cinzel text-[10px] tracking-widest text-gray-400 uppercase mb-1">{size} — £</label>
+                <input
+                  type="number"
+                  step="0.01"
+                  className="input text-sm"
+                  value={form.size_prices[size] || ''}
+                  placeholder={form.price || '0.00'}
+                  onChange={e => setField('size_prices', { ...form.size_prices, [size]: e.target.value ? +e.target.value : undefined })}
+                />
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-gray-400 font-cormorant mt-2">If a size has no price set, the default price above will be used</p>
+        </div>
+      )}
 
       {/* Toggles */}
       <div className="flex gap-8 mb-8">

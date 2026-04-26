@@ -15,6 +15,12 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const [selectedColour, setSelectedColour] = useState('')
   const [selectedSize, setSelectedSize] = useState('')
   const [qty, setQty] = useState(1)
+  const getPrice = () => {
+    if (selectedSize && product.size_prices?.[selectedSize]) {
+      return product.size_prices[selectedSize]
+    }
+    return product.price
+  }
   const addItem = useCart(s => s.addItem)
   const supabase = createClient()
 
@@ -40,7 +46,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     if (product.sizes?.length > 0 && !selectedSize) { toast.error('Please select a size'); return }
     addItem({
       product_id: product.id, name: product.name,
-      price: product.price, image: images[0],
+      price: getPrice(), image: images[0],
       quantity: qty, selected_colour: selectedColour, selected_size: selectedSize
     })
     toast.success(`${product.name} added to cart! 🌹`)
@@ -81,14 +87,17 @@ export default function ProductPage({ params }: { params: { id: string } }) {
             <h1 className="font-playfair text-4xl font-black text-gray-900 leading-tight mb-4">{product.name}</h1>
 
             <div className="flex items-center gap-4 mb-6">
-              <span className="font-playfair text-3xl font-bold text-crimson">£{product.price.toFixed(2)}</span>
+              <span className="font-playfair text-3xl font-bold text-crimson">£{getPrice().toFixed(2)}</span>
               {product.compare_price && (
                 <span className="text-gray-400 line-through text-xl">£{product.compare_price.toFixed(2)}</span>
               )}
               {product.compare_price && (
                 <span className="bg-crimson/10 text-crimson font-cinzel text-xs px-2 py-1">
-                  Save £{(product.compare_price - product.price).toFixed(2)}
+                  Save £{(product.compare_price - getPrice()).toFixed(2)}
                 </span>
+              )}
+              {selectedSize && product.size_prices?.[selectedSize] && (
+                <span className="bg-gold/10 text-gold font-cinzel text-xs px-2 py-1">Size {selectedSize} price</span>
               )}
             </div>
 
@@ -162,4 +171,3 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     </>
   )
 }
- 
