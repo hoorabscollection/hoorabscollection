@@ -20,10 +20,11 @@ export default function LoginPage() {
       toast.error(error.message)
     } else {
       toast.success('Welcome back!')
+      await new Promise(resolve => setTimeout(resolve, 500))
       if (email === process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
-        router.push('/admin')
+        window.location.href = '/admin'
       } else {
-        router.push('/account')
+        window.location.href = '/account'
       }
     }
     setLoading(false)
