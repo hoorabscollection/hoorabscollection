@@ -21,7 +21,11 @@ export default function CartPage() {
     })
     const data = await res.json()
     if (data.success) {
-      setPromo(promo.toUpperCase(), data.discount_amount)
+      setPromo(promo.toUpperCase(), data.discount_amount, {
+        code: data.code,
+        discount_type: data.discount_type,
+        discount_value: data.discount_value,
+      })
       toast.success(data.message || `Promo applied!`)
     } else {
       toast.error(data.error || 'Invalid promo code')
